@@ -72,7 +72,8 @@ IMPLEMENT_PROPERTY(UITextView)
     
     NSNumber *number = [textField valueForKey:PROPERTY_NAME];
     if (number && textField.text.length > [number integerValue] && textField.markedTextRange == nil) {
-        textField.text = [textField.text substringWithRange: NSMakeRange(0, [number integerValue])];
+        //textField.text = [textField.text substringWithRange: NSMakeRange(0, [number integerValue])];//如有emoji会出错
+          textField.text = [textField.text substringWithRange: [textField.text rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, [number integerValue])]];
     }
 }
 
@@ -83,7 +84,8 @@ IMPLEMENT_PROPERTY(UITextView)
     
     NSNumber *number = [textView valueForKey:PROPERTY_NAME];
     if (number && textView.text.length > [number integerValue] && textView.markedTextRange == nil) {
-        textView.text = [textView.text substringWithRange: NSMakeRange(0, [number integerValue])];
+        //textView.text = [textView.text substringWithRange: NSMakeRange(0, [number integerValue])];//如有emoji会出错
+            textView.text = [textView.text substringWithRange: [textView.text rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, [number integerValue])]];
     }
 }
 
